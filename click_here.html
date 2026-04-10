@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rastermap Viewer</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="page-shell">
+    <div class="status-banner hidden" id="statusBanner" role="status" aria-live="polite"></div>
+
+    <div class="workspace-grid">
+      <main class="main-column" id="mainColumn">
+        <section class="panel selector-panel" id="selectorPanel">
+          <div class="section-header section-header-inline">
+            <h1>Stim. type selector</h1>
+            <div class="stim-type-list" id="stimTypeList"></div>
+          </div>
+        </section>
+
+        <section class="panel figure-panel" id="figurePanel">
+          <div class="section-header">
+            <h2>Rastermap</h2>
+            <button class="ghost-button" id="resetViewButton" type="button">reset view</button>
+          </div>
+
+          <div class="figure-stack">
+            <div class="response-row">
+              <aside class="y-axis-panel">
+                <div class="y-axis-track" id="yAxisTrack">
+                  <span class="axis-cap axis-cap-top"></span>
+                  <span class="axis-cap axis-cap-bottom"></span>
+                  <div class="fake-slider fake-slider-vertical" id="ySliderThumb">
+                    <span class="scrollbar-handle scrollbar-handle-start" data-edge="start"></span>
+                    <span class="fake-slider-label">III</span>
+                    <span class="scrollbar-handle scrollbar-handle-end" data-edge="end"></span>
+                  </div>
+                </div>
+                <div class="axis-label axis-label-vertical neuron-label" id="neuronLabel">Neurons (0 in total)</div>
+              </aside>
+
+              <div class="image-stage-shell" id="imageStageShell">
+                <svg class="interval-marker-strip hidden" id="intervalMarkerStrip" aria-hidden="true"></svg>
+                <div class="image-stage" id="imageStage">
+                  <div class="image-placeholder hidden" id="rasterPlaceholder"></div>
+                  <div class="image-viewport hidden" id="imageViewport">
+                    <svg class="figure-overlay-svg hidden" id="intervalOverlay" aria-hidden="true" preserveAspectRatio="none"></svg>
+                    <img class="figure-image stim-overlay hidden" id="stimOverlay" alt="Stimulus overlay">
+                    <img class="figure-image raster-image hidden" id="rasterImage" alt="Rastermap image">
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="time-axis-panel">
+              <div class="time-axis-track" id="xAxisTrack">
+                <span class="axis-cap axis-cap-left"></span>
+                <span class="axis-cap axis-cap-right"></span>
+                <div class="fake-slider fake-slider-horizontal" id="xSliderThumb">
+                  <span class="scrollbar-handle scrollbar-handle-start" data-edge="start"></span>
+                  <span class="fake-slider-label">III</span>
+                  <span class="scrollbar-handle scrollbar-handle-end" data-edge="end"></span>
+                </div>
+              </div>
+              <div class="time-axis-footer">
+                <span class="time-axis-start">0</span>
+                <span class="axis-label" id="timeLabel">Time (0 minutes in total)</span>
+              </div>
+            </div>
+
+            <div class="swim-panel" id="swimPanel">
+              <div class="swim-header">Swim</div>
+              <div class="swim-stage" id="swimStage">
+                <canvas class="swim-canvas hidden" id="swimCanvas" aria-label="Swim trace"></canvas>
+                <img class="swim-image hidden" id="swimImage" alt="Swim signal">
+                <div class="swim-empty" id="swimEmpty"></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel stim-panel" id="stimPanel">
+          <div class="section-header section-header-inline">
+            <h2>Stim. selector</h2>
+            <button class="ghost-button" id="locateStimButton" type="button" title="locate current stim.">
+              locate current stim.
+            </button>
+          </div>
+
+          <div class="stim-gallery-shell">
+            <button class="gallery-arrow" id="stimPrevButton" type="button" aria-label="Previous stimuli">&#10094;</button>
+            <div class="stim-gallery" id="stimGallery" tabindex="0" aria-label="Stimulus selector"></div>
+            <button class="gallery-arrow" id="stimNextButton" type="button" aria-label="Next stimuli">&#10095;</button>
+          </div>
+        </section>
+      </main>
+
+      <aside class="panel fish-panel" id="fishPanel">
+        <div class="fish-title" id="fishTitle">Fish</div>
+
+        <div class="fish-list-shell">
+          <button class="fish-arrow" id="fishPrevButton" type="button" aria-label="Previous fish">
+            &#9650;
+          </button>
+
+          <div class="fish-list" id="fishList" aria-label="Fish selector"></div>
+
+          <button class="fish-arrow" id="fishNextButton" type="button" aria-label="Next fish">
+            &#9660;
+          </button>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <script src="resources/data.js"></script>
+  <script src="resources/stim_intervals.js"></script>
+  <script src="resources/swim_data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
