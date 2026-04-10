@@ -1,6 +1,11 @@
 ﻿(function () {
   "use strict";
 
+  const defaultSelection = {
+    stimType: "ethological_cues",
+    fishName: "5-3",
+    stimId: 2
+  };
   const appData = window.APP_DATA || { figs: [], stims: {} };
   const stimIntervalData = window.APP_STIM_INTERVALS || { by_fish_id: {} };
   const swimData = window.APP_SWIM_DATA || { by_fish_id: {} };
@@ -122,8 +127,10 @@
       return;
     }
 
-    const initialStimType = stimTypeOrder.find((stimType) => fishByStimType[stimType].length) || fishes[0].stim_type;
-    const initialFish = getDefaultFishForStimType(initialStimType);
+    const initialStimType = defaultSelection.stimType;
+    const initialFish =
+      fishByStimType[initialStimType]?.find((fish) => fish.fish_name === defaultSelection.fishName) ||
+      getDefaultFishForStimType(initialStimType);
 
     if (!initialFish) {
       showStatus("No fish data is available for the current dataset.");
@@ -132,6 +139,10 @@
 
     bindEvents();
     applyFishSelection(initialFish, { resetStim: true, resetView: true, syncStimType: true });
+
+    if (state.currentStimType === defaultSelection.stimType && state.currentFishName === defaultSelection.fishName) {
+      setStimulus(defaultSelection.stimId);
+    }
   }
 
   function bindEvents() {
