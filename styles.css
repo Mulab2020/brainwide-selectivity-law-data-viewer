@@ -531,10 +531,10 @@ h2,
   box-shadow: inset 0 0 0 5px var(--stim-accent, currentColor), 0 0 0 5px var(--stim-accent, currentColor);
 }
 
-.stim-card.is-active span {
-  /* color: #ffffff; */
+/* .stim-card.is-active span {
+  color: #ffffff;
   font-weight: 700;
-}
+} */
 
 .fish-panel {
   position: relative;
